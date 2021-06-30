@@ -17,25 +17,43 @@ public class MovieController {
 	private MovieService movieService;
 	
 	// display list of movies
-	@GetMapping("/")
+	@GetMapping("/browseAll")
 	public String viewHomePage(Model model) {
 		model.addAttribute("listMovies", movieService.getAllMovies());
-		return "index";
+		return "tablepage";
 	}
 	
+	/*Admin functionality
 	@GetMapping("/showNewMovieForm")
 	public String showNewMovieForm(Model model) {
 		Movie movie = new Movie();
 		model.addAttribute("movie", movie);
 		return "new_movie";
-		
+	}*/
+	
+	@GetMapping("/movieProfile")
+	public String getMovieProfile(Model model) {
+		Movie movie = new Movie();
+		model.addAttribute("movie", movie);
+		return "movieprofile";
 	}
 	
+	@GetMapping("/userProfile")
+	public String getUserProfile() {
+		return "userprofile";
+	}
+	
+	@GetMapping("/home")
+	public String getHome() {
+		return "homepage";
+	}
+	
+	/*Admin Functionality:
 	@PostMapping("/saveMovie")
 	public String saveMovie(@ModelAttribute("movie") Movie movie) {
 		//save movie to database
 		movieService.saveMovie(movie);
 		return "redirect:/";
-	}
+	}*/
 
 }
