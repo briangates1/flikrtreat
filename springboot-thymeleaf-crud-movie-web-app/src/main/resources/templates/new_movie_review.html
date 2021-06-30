@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin Add Movie Review</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<center><h1>Admin Add Movie</h1></center>
+		<hr>
+		<h2>*Movie Review</h2>
+
+		<form action="#" th:action="@{/saveMovieReview}" th:object="${movieReview}"
+			method="POST">
+			<input type="text" th:field="*{userId}"
+				placeholder="Movie Id" class="form-control mb-4 col-4">
+				
+				<h2>*Movie Id</h2>
+				<input type="text" th:field="*{movieId}"
+				placeholder="Movie Genre" class="form-control mb-4 col-4">
+				
+				<h2>*Movie Review</h2>
+				<input type="text" th:field="*{review}"
+				placeholder="Movie Rating" class="form-control mb-4 col-4">
+				
+				<h2>*Movie rating</h2>
+				<input type="text" th:field="*{rating}"
+				placeholder="Movie Year" class="form-control mb-4 col-4">
+				
+				<button type="submit" class="btn btn-info col-3"> Save Movie Review</button>
+		</form>
+		
+		<hr>
+		
+		<a th:href = "@{/}"> Back to Movie List</a>
+	</div>
+</body>
+</html>

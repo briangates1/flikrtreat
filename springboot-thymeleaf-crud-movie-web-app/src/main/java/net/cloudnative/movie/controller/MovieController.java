@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import net.cloudnative.movie.model.Movie;
+import net.cloudnative.movie.model.MovieReview;
+import net.cloudnative.movie.service.MovieReviewService;
 import net.cloudnative.movie.service.MovieService;
 
 @Controller
@@ -16,6 +18,11 @@ public class MovieController {
 	@Autowired
 	private MovieService movieService;
 	
+	@Autowired
+	private MovieReviewService movieReviewService;
+
+	
+	// -------------------------------------- For the home page ---------------------------------------------------
 	// display list of movies
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
@@ -23,6 +30,8 @@ public class MovieController {
 		return "index";
 	}
 	
+	
+	// -------------------------------------- For the admin page---------------------------------------------------
 	@GetMapping("/showNewMovieForm")
 	public String showNewMovieForm(Model model) {
 		Movie movie = new Movie();
@@ -37,5 +46,28 @@ public class MovieController {
 		movieService.saveMovie(movie);
 		return "redirect:/";
 	}
-
+	
+	
+	// -------------------------------------- For the movie profile page ---------------------------------------------------
+	@GetMapping("/movieProfile")
+	public String viewMovieProfilePage(Model model) {
+		model.addAttribute("listMovieReviews", movieReviewService.getAllMovieReviews());
+		return "movie_review";
+	}
+	
+	@GetMapping("/showNewMovieReviewForm")
+	public String showNewMovieReviewForm(Model model) {
+		MovieReview movieReview = new MovieReview();
+		model.addAttribute("movieReview", movieReview);
+		return "new_movie_review";
+		
+	}
+	
+	@PostMapping("/saveMovieReview")
+	public String saveMovieReview(@ModelAttribute("movieReview") MovieReview movieReview) {
+		//save movie review to database
+		movieReviewService.saveMovieReview(movieReview);
+		return "movie_review";
+	}
+	
 }
